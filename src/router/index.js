@@ -4,6 +4,10 @@ import ContactView from '../views/ContactView.vue'
 import PostsView from '../views/PostsView.vue'
 import PostDetails from '../views/PostDetails.vue'
 import NotFound from '../views/NotFound.vue';
+import SidebarView from '../views/SidebarView.vue'
+
+
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -20,18 +24,23 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue')
     },
+
+    // name view 
     {
       path: '/contact',
       name: 'contact-page',
-      component: ContactView
+      // render 2 page when user visit '/contact' this path
+      components: { default: ContactView, sidebar: SidebarView }
     },
     {
       path: '/posts',
       name: 'posts-page',
       component: PostsView
     },
+
+    // name route
     {
-      path: '/posts/:id',
+      path: '/posts/:id/:slug',
       name: 'posts-details',
       component: PostDetails
     },
@@ -44,10 +53,10 @@ const router = createRouter({
       component: NotFound
     },
     // when the user visit the URL path '/home', the user will be redirect tha path '/'
-    {
-      path: '/home',
-      redirect: '/',
-    },
+    // {
+    //   path: '/home',
+    //   redirect: '/',
+    // },
 
 
     // alias : when user visit these url such as '/home', '/my-home','/ghor', every URL valid for '/' this path

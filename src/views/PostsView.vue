@@ -22,11 +22,16 @@ function goForward() {
 <template>
     <div>
         <h1>posts page |
-            <button  @click="goForward">forward</button>
+            <button @click="goForward">forward</button>
         </h1>
         <hr>
         <div v-for="item in posts" :key="item.id">
-            <h2><router-link :to="`/posts/${item.id}`">{{ item.title }}</router-link></h2>
+            <!-- <h2><router-link :to="`/posts/${item.id}`">{{ item.title }}</router-link></h2> -->
+
+            <!-- name route with params -->
+            <h2><router-link :to="{ name: 'posts-details', params: { id: item.id, slug: item.title } }">{{ item.title
+            }}</router-link></h2>
+
         </div>
     </div>
 </template>
