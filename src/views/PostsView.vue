@@ -1,8 +1,6 @@
 <script setup>
-import { useRoute, useRouter } from "vue-router"
-const route = useRoute();
+import {useRouter } from "vue-router"
 const router = useRouter();
-
 const posts = [
     { id: 1, title: 'vue js course' },
     { id: 2, title: 'java course' },

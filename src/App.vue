@@ -10,12 +10,11 @@
       <RouterLink :to="{ name: 'about-page' }">about</RouterLink>
       <RouterLink :to="{ name: 'contact-page' }">contact</RouterLink>
       <RouterLink :to="{ name: 'posts-page' }">posts</RouterLink>
+     
+
     </nav>
     <div>
       <RouterView />
-
-      <!-- name view -->
-      <RouterView name="sidebar"  />
     </div>
   </div>
 </template>

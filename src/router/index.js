@@ -8,31 +8,58 @@ import SidebarView from '../views/SidebarView.vue'
 
 
 
+// vue router syntax matching with regex
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    // {
-    //   path: '/',
-    //   name: 'home-page',
-    //   component: HomeView
-    // },
+    {
+      path: '/',
+      name: 'home-page',
+      component: HomeView
+    },
     {
       path: '/about',
       name: 'about-page',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue')
     },
 
-    // name view 
+
     {
       path: '/contact',
       name: 'contact-page',
-      // render 2 page when user visit '/contact' this path
-      components: { default: ContactView, sidebar: SidebarView },
-      // if i am using props with these pages
-      props: { default: true, sidebar: true }
+      component: ContactView,
+      sensitive: true,
+      strict: true,
+
+    },
+
+    // sidebar page valid when id is numeric
+    // {
+    //   path: '/sidebar/:id(\\d+)',
+    //   name: 'sidebar-page',
+    //   component: SidebarView,
+
+    // },
+
+
+    // optional perameter
+    // {
+    //   path: '/sidebar/:id?',
+    //   name: 'sidebar-page',
+    //   component: SidebarView,
+
+    // },
+
+
+
+    // sensetive perameter 
+    {
+      path: '/sidebar/:name?',
+      name: 'sidebar-page',
+      component: SidebarView,
+      sensitive: true,
+      strict: true,
+
     },
     {
       path: '/posts',
@@ -40,35 +67,19 @@ const router = createRouter({
       component: PostsView
     },
 
-    // name route
+
+    // using regsex, id should be only number
     {
-      path: '/posts/:id/:slug',
+      path: '/posts/:id(\^-?\d+$\)/:slug',
       name: 'posts-details',
       component: PostDetails,
-      // routing props 
-      props: true,
+
     },
-
-
-    // when user visits invalid URL the 404 page will be show
+    // for 404 not found page 
     {
       path: '/:pathMatch(.*)*',
       name: 'not-found-page',
       component: NotFound
-    },
-    // when the user visit the URL path '/home', the user will be redirect tha path '/'
-    // {
-    //   path: '/home',
-    //   redirect: '/',
-    // },
-
-
-    // alias : when user visit these url such as '/home', '/my-home','/ghor', every URL valid for '/' this path
-    {
-      path: '/',
-      name: 'home-page',
-      component: HomeView,
-      alias: ['/home', '/my-home', '/ghor'],
     },
 
   ]
