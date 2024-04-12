@@ -5,10 +5,12 @@ import PostsView from '../views/PostsView.vue'
 import PostDetails from '../views/PostDetails.vue'
 import NotFound from '../views/NotFound.vue';
 import SidebarView from '../views/SidebarView.vue'
+import BlogView from '../views/BlogView.vue'
+import NoPostView from '../views/NoPostView.vue'
 
 
 
-// vue router syntax matching with regex
+// resting route
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -33,49 +35,44 @@ const router = createRouter({
 
     },
 
-    // sidebar page valid when id is numeric
-    // {
-    //   path: '/sidebar/:id(\\d+)',
-    //   name: 'sidebar-page',
-    //   component: SidebarView,
 
-    // },
-
-
-    // optional perameter
-    // {
-    //   path: '/sidebar/:id?',
-    //   name: 'sidebar-page',
-    //   component: SidebarView,
-
-    // },
-
-
-
-    // sensetive perameter that means case sensetive
-    // strict true that means if user visit url is : /sidebar/hossain/ then user redirect to 404 page
-    // valid url is '/sidebar/hossain'
     {
-      path: '/sidebar/:name?',
+      path: '/sidebar',
       name: 'sidebar-page',
       component: SidebarView,
       sensitive: true,
       strict: true,
 
     },
+
+    {
+      path: '/blog',
+      name: 'blog-page',
+      component: BlogView,
+      sensitive: true,
+      strict: true,
+
+    },
+
+    // nested route
     {
       path: '/posts',
-      name: 'posts-page',
-      component: PostsView
+      // name: 'posts-page',
+      component: PostsView,
+      children: [
+        // default page show
+        {
+          path:'',
+          component:NoPostView
+        },
+        {
+          path: ':id(\\d+)',
+          name: 'posts-details',
+          component: PostDetails,
+        }
+      ]
     },
 
-
-    // using regsex, id should be only number
-    {
-      path: '/posts/:id(\^-?\d+$\)/:slug',
-      name: 'posts-details',
-      component: PostDetails,
-    },
     // for 404 not found page 
     {
       path: '/:pathMatch(.*)*',

@@ -21,30 +21,38 @@ function goForward() {
             <button @click="goForward">forward</button>
         </h1>
         <hr>
-        <div v-for="item in posts" :key="item.id">
-            <!-- <h2><router-link :to="`/posts/${item.id}`">{{ item.title }}</router-link></h2> -->
+        <div class="container">
+            <div>
 
-            <!-- name route with params -->
-            <!-- <h2>
-                <router-link
-                    :to="{ name: 'posts-details', params: { id: item.id, slug: item.title.replaceAll(' ', '-') } }">{{
-                        item.title
-                    }}</router-link>
-            </h2> -->
+                <div v-for="item in posts" :key="item.id">
+                    <!-- <h2><router-link :to="`/posts/${item.id}`">{{ item.title }}</router-link></h2> -->
+
+                  
+                    <h2>
+                        <router-link :to="{ name: 'posts-details', params: { id: item.id } }">{{
+                            item.title
+                        }}</router-link>
+                    </h2>
+                </div>
+            </div>
 
 
-
-            <!-- programmatic navigation  -->
-            <button @click="router.push({
-                name: 'posts-details',
-                params: { id: item.id, slug: item.title.replaceAll(' ', '-') },
-                query: { tag: 'web' }
-            })">
-                {{ item.title }}
-            </button>
+            <div>
+                <!-- nested routes -->
+                <RouterView />
+            </div>
         </div>
     </div>
 </template>
+
+<style scoped>
+.container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    
+}
+</style>
   
 
   
