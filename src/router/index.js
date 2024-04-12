@@ -52,7 +52,9 @@ const router = createRouter({
 
 
 
-    // sensetive perameter 
+    // sensetive perameter that means case sensetive
+    // strict true that means if user visit url is : /sidebar/hossain/ then user redirect to 404 page
+    // valid url is '/sidebar/hossain'
     {
       path: '/sidebar/:name?',
       name: 'sidebar-page',
@@ -73,7 +75,6 @@ const router = createRouter({
       path: '/posts/:id(\^-?\d+$\)/:slug',
       name: 'posts-details',
       component: PostDetails,
-
     },
     // for 404 not found page 
     {

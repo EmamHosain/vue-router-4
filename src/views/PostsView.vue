@@ -1,5 +1,5 @@
 <script setup>
-import {useRouter } from "vue-router"
+import { useRouter } from "vue-router"
 const router = useRouter();
 const posts = [
     { id: 1, title: 'vue js course' },
@@ -25,9 +25,23 @@ function goForward() {
             <!-- <h2><router-link :to="`/posts/${item.id}`">{{ item.title }}</router-link></h2> -->
 
             <!-- name route with params -->
-            <h2><router-link :to="{ name: 'posts-details', params: { id: item.id, slug: item.title } }">{{ item.title
-            }}</router-link></h2>
+            <!-- <h2>
+                <router-link
+                    :to="{ name: 'posts-details', params: { id: item.id, slug: item.title.replaceAll(' ', '-') } }">{{
+                        item.title
+                    }}</router-link>
+            </h2> -->
 
+
+
+            <!-- programmatic navigation  -->
+            <button @click="router.push({
+                name: 'posts-details',
+                params: { id: item.id, slug: item.title.replaceAll(' ', '-') },
+                query: { tag: 'web' }
+            })">
+                {{ item.title }}
+            </button>
         </div>
     </div>
 </template>
