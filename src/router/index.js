@@ -30,7 +30,9 @@ const router = createRouter({
       path: '/contact',
       name: 'contact-page',
       // render 2 page when user visit '/contact' this path
-      components: { default: ContactView, sidebar: SidebarView }
+      components: { default: ContactView, sidebar: SidebarView },
+      // if i am using props with these pages
+      props: { default: true, sidebar: true }
     },
     {
       path: '/posts',
@@ -42,7 +44,9 @@ const router = createRouter({
     {
       path: '/posts/:id/:slug',
       name: 'posts-details',
-      component: PostDetails
+      component: PostDetails,
+      // routing props 
+      props: true,
     },
 
 

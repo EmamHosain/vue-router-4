@@ -2,6 +2,8 @@
 import { useRoute, useRouter } from "vue-router";
 // const route = useRoute();
 const router = useRouter();
+const props = defineProps(['id', 'slug']);
+console.log(props);
 
 // console.log('from post details page',router);
 
@@ -13,9 +15,14 @@ function goBack() {
 <template>
     <div>
         <h1>post details page | <button @click="goBack">back</button></h1>
-        <!-- <h2>post id : {{ route.params.id }}</h2> --> 
+        <!-- <h2>post id : {{ route.params.id }}</h2> -->
         <h2>post id : {{ router.currentRoute.value.params.id }}</h2>
         <h2>post title : {{ router.currentRoute.value.params.slug }}</h2>
 
+        <hr>
+        <!-- using routing props -->
+        <h1 style="background-color:red">using routing props</h1>
+        <h2>post id : {{ props.id }}</h2>
+        <h2>post title : {{ props.slug }}</h2>
     </div>
 </template>
