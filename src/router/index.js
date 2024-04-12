@@ -7,6 +7,7 @@ import NotFound from '../views/NotFound.vue';
 import SidebarView from '../views/SidebarView.vue'
 import BlogView from '../views/BlogView.vue'
 import NoPostView from '../views/NoPostView.vue'
+import LoginView from '../views/LoginView.vue'
 
 
 
@@ -33,18 +34,20 @@ const router = createRouter({
       sensitive: true,
       strict: true,
 
+      // per route guards
+      // beforeEnter: () => {
+      //   // return false;
+      //   router.push('/about')
+      // }
+
     },
-
-
     {
       path: '/sidebar',
       name: 'sidebar-page',
       component: SidebarView,
       sensitive: true,
       strict: true,
-
     },
-
     {
       path: '/blog',
       name: 'blog-page',
@@ -62,8 +65,8 @@ const router = createRouter({
       children: [
         // default page show
         {
-          path:'',
-          component:NoPostView
+          path: '',
+          component: NoPostView
         },
         {
           path: ':id(\\d+)',
@@ -78,6 +81,14 @@ const router = createRouter({
       path: '/:pathMatch(.*)*',
       name: 'not-found-page',
       component: NotFound
+    },
+
+    {
+      path: '/login',
+      name: 'login-page',
+      component: LoginView,
+      
+
     },
 
   ]
