@@ -14,6 +14,7 @@ const router = useRouter();
       <router-link :to="{ name: 'sidebar-page' }">sidebar</router-link>
       <router-link :to="{ name: 'blog-page' }">blog</router-link>
       <router-link :to="{ path: '/posts' }">posts</router-link>
+      <router-link :to="{ name: 'login-page' }">login</router-link>
 
 
     </nav>
@@ -54,7 +55,7 @@ a {
   border-radius: 0.5rem;
 }
 
-.router-link-active{
+.router-link-active {
   background-color: green;
   color: white;
 }

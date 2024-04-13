@@ -9,21 +9,23 @@ import BlogView from '../views/BlogView.vue'
 import NoPostView from '../views/NoPostView.vue'
 import LoginView from '../views/LoginView.vue'
 
-
-
-// resting route
+//route meta with authentication system
+const isTrue = false;
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
       name: 'home-page',
-      component: HomeView
+      component: HomeView,
+      // meta: { isAuthenticated: isTrue }
+
     },
     {
       path: '/about',
       name: 'about-page',
-      component: () => import('../views/AboutView.vue')
+      component: () => import('../views/AboutView.vue'),
+      // meta: { isAuthenticated: isTrue }
     },
 
 
@@ -33,12 +35,15 @@ const router = createRouter({
       component: ContactView,
       sensitive: true,
       strict: true,
+      meta: { isAuthenticated: isTrue },
 
       // per route guards
-      // beforeEnter: () => {
-      //   // return false;
-      //   router.push('/about')
-      // }
+      // when user visit the contact page user redirect to login-page
+      beforeEnter: (to, from) => {
+        if (!to.meta.isAuthenticated) {
+          return { name: 'login-page' }
+        }
+      }
 
     },
     {
@@ -47,6 +52,8 @@ const router = createRouter({
       component: SidebarView,
       sensitive: true,
       strict: true,
+      // meta: { isAuthenticated: isTrue }
+
     },
     {
       path: '/blog',
@@ -54,6 +61,7 @@ const router = createRouter({
       component: BlogView,
       sensitive: true,
       strict: true,
+      // meta: { isAuthenticated: isTrue }
 
     },
 
@@ -62,6 +70,8 @@ const router = createRouter({
       path: '/posts',
       // name: 'posts-page',
       component: PostsView,
+      // meta: { isAuthenticated: isTrue },
+
       children: [
         // default page show
         {
@@ -72,6 +82,8 @@ const router = createRouter({
           path: ':id(\\d+)',
           name: 'posts-details',
           component: PostDetails,
+          // meta: { isAuthenticated: isTrue }
+
         }
       ]
     },
@@ -87,8 +99,7 @@ const router = createRouter({
       path: '/login',
       name: 'login-page',
       component: LoginView,
-      
-
+      // meta: { isAuthenticated: isTrue }
     },
 
   ]
