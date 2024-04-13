@@ -9,8 +9,8 @@ import BlogView from '../views/BlogView.vue'
 import NoPostView from '../views/NoPostView.vue'
 import LoginView from '../views/LoginView.vue'
 
-//route meta with authentication system
-const isTrue = false;
+//route scroll behavior
+const isTrue = true;
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -102,7 +102,10 @@ const router = createRouter({
       // meta: { isAuthenticated: isTrue }
     },
 
-  ]
+  ],
+  scrollBehavior(to, from, savedPosition) {
+    return { top: 0 }
+  }
 })
 
 export default router
